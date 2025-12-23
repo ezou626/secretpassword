@@ -5,6 +5,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -21,15 +23,26 @@ public class SecretPassword implements ModInitializer {
 	public static MinecraftServer server;
 	public static final Map<ServerPlayer, LocalDateTime> PENDING_AUTHENTICATION = new LinkedHashMap<>();
 	public static final int PASSWORD_ENTRY_TIME_LIMIT_SECONDS = 300; // 5 minutes
+	public static final String WHITELIST_FILE_NAME = "whitelist.txt";
+	public static final Path PASSWORD_FILE = Path.of("password.hash");
+	public static String hashedPassword = null;
 
+	/**
+	 * Loads the hashed password for verification
+	 */
 	@Override
 	public void onInitialize() {
-
+		try {
+			hashedPassword = Files.readString(PASSWORD_FILE).trim();
+		} catch (Exception e) {
+			LOGGER.error("Error while creating password.hash file:", e);
+			throw new RuntimeException("Failed to read password.hash file", e);
+		}
 		LOGGER.info("secret-password loaded");
 	}
 
 	/**
-	 * Boots unauthenticated players who don't enter their password within 60
+	 * Boots unauthenticated players who don't enter their password within 300
 	 * seconds.
 	 */
 	public static void tick() {
