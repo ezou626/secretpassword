@@ -21,3 +21,7 @@ Configure your password with the following commands (requires OP permissions):
 `/disablepassword <password>`
 
 Users on login will be prompted to provide the password via `/login <password>`
+
+## Credits
+
+[Jacie ZYT's More Powerful Password System For Fabric Servers](https://github.com/Jasonzyt/password-fabric)
