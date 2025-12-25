@@ -60,12 +60,11 @@ public class SecretPassword implements ModInitializer {
 	}
 
 	public static void cancelAction(ServerPlayer player, CallbackInfo ci) {
-		if (PENDING_AUTHENTICATION.containsKey(player)) {
-			player.sendSystemMessage(Component.literal("You must enter the password before playing!"));
-			ci.cancel();
-			player.inventoryMenu.slotsChanged(player.getInventory());
-			player.containerMenu.broadcastChanges();
+		if (!PENDING_AUTHENTICATION.containsKey(player)) {
+			return;
 		}
+		player.sendSystemMessage(Component.literal("You must enter the password before playing!"));
+		ci.cancel();
 	}
 
 	/**
