@@ -229,10 +229,12 @@ public class ServerGamePacketListenerImplMixin {
         SecretPassword.cancelAction(player, ci);
     }
 
-    @Inject(method = "handleChatSessionUpdate", at = @At("HEAD"), cancellable = true)
-    private void onChatSessionUpdate(ServerboundChatSessionUpdatePacket packet, CallbackInfo ci) {
-        SecretPassword.cancelAction(player, ci);
-    }
+    // @Inject(method = "handleChatSessionUpdate", at = @At("HEAD"), cancellable =
+    // true)
+    // private void onChatSessionUpdate(ServerboundChatSessionUpdatePacket packet,
+    // CallbackInfo ci) {
+    // SecretPassword.cancelAction(player, ci);
+    // }
 
     // @Inject(method = "handleConfigurationAcknowledged", at = @At("HEAD"),
     // cancellable = true)

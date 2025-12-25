@@ -1,9 +1,11 @@
 package oobians.mc;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import com.mojang.brigadier.Command;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,6 +19,8 @@ import java.util.Map.Entry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class SecretPassword implements ModInitializer {
 	public static final String MOD_ID = "secret-password";
@@ -53,10 +57,22 @@ public class SecretPassword implements ModInitializer {
 		PENDING_AUTHENTICATION.remove(player);
 	}
 
-	public static void onPlayerAuthenticated(ServerPlayer player) {
+	public static int tryLogin(ServerPlayer player, String password) {
+
+		if (SecretPassword.hashedPassword == null) {
+			player.sendSystemMessage(Component.literal("Server password is not set. Contact an administrator.")
+					.withStyle(ChatFormatting.RED));
+			return 0;
+		}
+
+		if (!BCrypt.verifyer().verify(password.toCharArray(), hashedPassword.toCharArray()).verified) {
+			player.sendSystemMessage(Component.literal("Incorrect password. Please try again."));
+			return 0;
+		}
 		PENDING_AUTHENTICATION.remove(player);
 		LOGGER.info("Player " + player.getName().getString() + " has authenticated successfully.");
 		player.sendSystemMessage(Component.literal("Login Successful"));
+		return Command.SINGLE_SUCCESS;
 	}
 
 	public static void cancelAction(ServerPlayer player, CallbackInfo ci) {
