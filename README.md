@@ -20,7 +20,7 @@ Configure your password with the following commands (requires OP permissions):
 
 `/disablepassword <password>`
 
-Users on login will be prompted to provide the password via `/login <password>`
+Users on login will be prompted to provide the password via `/password <password>`
 
 ## Credits
 
