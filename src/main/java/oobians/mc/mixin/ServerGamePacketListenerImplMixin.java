@@ -32,10 +32,10 @@ public class ServerGamePacketListenerImplMixin {
         SecretPassword.cancelAction(player, ci);
     }
 
-    @Inject(method = "handleChatAck", at = @At("HEAD"), cancellable = true)
-    private void onChatAck(ServerboundChatAckPacket packet, CallbackInfo ci) {
-        SecretPassword.cancelAction(player, ci);
-    }
+    // @Inject(method = "handleChatAck", at = @At("HEAD"), cancellable = true)
+    // private void onChatAck(ServerboundChatAckPacket packet, CallbackInfo ci) {
+    // SecretPassword.cancelAction(player, ci);
+    // }
 
     @Inject(method = "handleClientCommand", at = @At("HEAD"), cancellable = true)
     private void onClientCommand(ServerboundClientCommandPacket packet, CallbackInfo ci) {
@@ -122,10 +122,12 @@ public class ServerGamePacketListenerImplMixin {
         SecretPassword.cancelAction(player, ci);
     }
 
-    @Inject(method = "handleSeenAdvancements", at = @At("HEAD"), cancellable = true)
-    private void onSeenAdvancements(ServerboundSeenAdvancementsPacket packet, CallbackInfo ci) {
-        SecretPassword.cancelAction(player, ci);
-    }
+    // @Inject(method = "handleSeenAdvancements", at = @At("HEAD"), cancellable =
+    // true)
+    // private void onSeenAdvancements(ServerboundSeenAdvancementsPacket packet,
+    // CallbackInfo ci) {
+    // SecretPassword.cancelAction(player, ci);
+    // }
 
     @Inject(method = "handleCustomCommandSuggestions", at = @At("HEAD"), cancellable = true)
     private void onCustomCommandSuggestions(ServerboundCommandSuggestionPacket packet, CallbackInfo ci) {
@@ -232,25 +234,31 @@ public class ServerGamePacketListenerImplMixin {
         SecretPassword.cancelAction(player, ci);
     }
 
-    @Inject(method = "handleConfigurationAcknowledged", at = @At("HEAD"), cancellable = true)
-    private void onConfigurationAcknowledged(ServerboundConfigurationAcknowledgedPacket packet, CallbackInfo ci) {
-        SecretPassword.cancelAction(player, ci);
-    }
+    // @Inject(method = "handleConfigurationAcknowledged", at = @At("HEAD"),
+    // cancellable = true)
+    // private void
+    // onConfigurationAcknowledged(ServerboundConfigurationAcknowledgedPacket
+    // packet, CallbackInfo ci) {
+    // SecretPassword.cancelAction(player, ci);
+    // }
 
-    @Inject(method = "handleChunkBatchReceived", at = @At("HEAD"), cancellable = true)
-    private void onChunkBatchReceived(ServerboundChunkBatchReceivedPacket packet, CallbackInfo ci) {
-        SecretPassword.cancelAction(player, ci);
-    }
+    // @Inject(method = "handleChunkBatchReceived", at = @At("HEAD"), cancellable =
+    // true)
+    // private void onChunkBatchReceived(ServerboundChunkBatchReceivedPacket packet,
+    // CallbackInfo ci) {
+    // SecretPassword.cancelAction(player, ci);
+    // }
 
     @Inject(method = "handleDebugSubscriptionRequest", at = @At("HEAD"), cancellable = true)
     private void onDebugSubscriptionRequest(ServerboundDebugSubscriptionRequestPacket packet, CallbackInfo ci) {
         SecretPassword.cancelAction(player, ci);
     }
 
-    @Inject(method = "handleClientTickEnd", at = @At("HEAD"), cancellable = true)
-    private void onClientTickEnd(ServerboundClientTickEndPacket packet, CallbackInfo ci) {
-        SecretPassword.cancelAction(player, ci);
-    }
+    // @Inject(method = "handleClientTickEnd", at = @At("HEAD"), cancellable = true)
+    // private void onClientTickEnd(ServerboundClientTickEndPacket packet,
+    // CallbackInfo ci) {
+    // SecretPassword.cancelAction(player, ci);
+    // }
 
     @Inject(method = "handleChat(Lnet/minecraft/network/protocol/game/ServerboundChatPacket;)V", at = @At(value = "HEAD"), cancellable = true)
     private void onChatMessage(ServerboundChatPacket serverboundChatPacket, CallbackInfo ci) {
